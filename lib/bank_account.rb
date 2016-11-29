@@ -19,13 +19,7 @@ class BankAccount
   end
 
   def print_statement
-    rows = []
-    @transactions.reverse_each do |record|
-      rows << [record[:date], record[:credit], record[:debit], record[:balance]]
-    end
-    table = Terminal::Table.new :rows => rows
-    table = Terminal::Table.new :headings => ['Date', 'Credit', 'Debit', 'Balance'], :rows => rows
-    puts table  
+    puts create_statement
   end
 
   private
@@ -39,5 +33,13 @@ class BankAccount
     }
     type == "deposit" ? record[:credit] = amount : record[:debit] = amount
     @transactions.push(record)
+  end
+
+  def create_statement
+    rows = []
+    @transactions.reverse_each do |record|
+      rows << [record[:date], record[:credit], record[:debit], record[:balance]]
+    end
+     return Terminal::Table.new :headings => ['Date', 'Credit', 'Debit', 'Balance'], :rows => rows
   end
 end
