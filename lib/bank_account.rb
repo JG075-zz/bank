@@ -19,16 +19,13 @@ class BankAccount
   private
 
   def create_record(type, amount)
-    record = Hash.new
-    record[:date] = Time.now.strftime("%d/%m/%Y")
-    if type == "deposit"
-      record[:credit] = amount
-      record[:debit] = 0
-    else
-      record[:debit] = amount
-      record[:credit] = 0
-    end
-    record[:balance] = @balance
+    record = {
+      date: Time.now.strftime("%d/%m/%Y"),
+      credit: 0,
+      debit: 0,
+      balance: @balance
+    }
+    type == "deposit" ? record[:credit] = amount : record[:debit] = amount
     @transactions.push(record)
   end
 end
