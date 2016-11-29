@@ -10,6 +10,10 @@ describe BankAccount do
       bank_account.deposit(500)
       expect(bank_account.balance).to eq(500)
     end
+
+    it "adds a record to the transactions array" do
+      expect{bank_account.deposit(500)}.to change{bank_account.transactions.length}.by(1)
+    end
   end
 
   describe "#withdraw" do
