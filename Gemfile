@@ -3,3 +3,4 @@ ruby '2.3.1'
 
 gem 'rspec'
 gem 'coveralls', require: false
+gem "terminal-table"

@@ -1,3 +1,5 @@
+require 'terminal-table'
+
 class BankAccount
   attr_reader :balance, :transactions
 
@@ -14,6 +16,16 @@ class BankAccount
   def withdraw(amount)
     @balance -= amount
     create_record("withdraw", amount)
+  end
+
+  def print_statement
+    rows = []
+    @transactions.reverse_each do |record|
+      rows << [record[:date], record[:credit], record[:debit], record[:balance]]
+    end
+    table = Terminal::Table.new :rows => rows
+    table = Terminal::Table.new :headings => ['Date', 'Credit', 'Debit', 'Balance'], :rows => rows
+    puts table  
   end
 
   private

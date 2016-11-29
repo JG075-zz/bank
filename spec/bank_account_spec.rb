@@ -1,4 +1,5 @@
 describe BankAccount do
+
   subject(:bank_account) { described_class.new }
 
   it "starts with a 0 balance" do
@@ -6,6 +7,7 @@ describe BankAccount do
   end
 
   describe "#deposit" do
+
     it "increases the balance" do
       bank_account.deposit(500)
       expect(bank_account.balance).to eq(500)
@@ -22,9 +24,11 @@ describe BankAccount do
         debit: 0,
         balance: 500})
     end
+
   end
 
   describe "#withdraw" do
+
     it "decreases the balance" do
       bank_account.deposit(2000)
       bank_account.withdraw(1000)
@@ -34,6 +38,21 @@ describe BankAccount do
     it "adds a record to the transactions array" do
       bank_account.deposit(1000)
       expect{bank_account.withdraw(500)}.to change{bank_account.transactions.length}.by(1)
+    end
+
+  end
+
+  describe "#print_statement" do
+
+    it "prints out a string with correct ammount" do
+      bank_account.deposit(100)
+      expect{bank_account.print_statement}.to output(/100/).to_stdout
+    end
+
+    it "prints out a string with correct date" do
+      bank_account.deposit(100)
+      date = Time.now.strftime("%d/%m/%Y")
+      expect{bank_account.print_statement}.to output(/#{date}/).to_stdout
     end
 
   end
