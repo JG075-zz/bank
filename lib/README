@@ -1,0 +1,37 @@
+# Bank
+
+An app that allows you to deposit amounts, withdraw amounts, and print a statement of your transactions.
+
+## Structure
+
+Since the requirements  are for just one account, it only has one bank account class that can do basic functions.
+
+## Setup
+
+To run the app:
+
+```
+$ git clone [REPO]
+$ cd bank
+$ irb
+$ require_relative './lib/bank_account'
+```
+
+## Example
+
+Inside IRB:
+
+```
+$ bank_account = BankAccount.new
+$ bank_account.deposit(500)
+$ bank_account.withdraw(200)
+$ bank_account.print_statement
+```
+
+## Testing
+
+To test the app:
+
+```
+$ rspec
+```
