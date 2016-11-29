@@ -13,17 +13,22 @@ class BankAccount
 
   def withdraw(amount)
     @balance -= amount
+    create_record("withdraw", amount)
   end
 
   private
 
   def create_record(type, amount)
-    record = {
-      date: Time.now.strftime("%d/%m/%Y"),
-      credit: amount,
-      debit: 0,
-      balance: @balance
-    }
+    record = Hash.new
+    record[:date] = Time.now.strftime("%d/%m/%Y")
+    if type == "deposit"
+      record[:credit] = amount
+      record[:debit] = 0
+    else
+      record[:debit] = amount
+      record[:credit] = 0
+    end
+    record[:balance] = @balance
     @transactions.push(record)
   end
 end

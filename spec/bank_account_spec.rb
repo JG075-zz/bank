@@ -18,7 +18,7 @@ describe BankAccount do
     it "adds a correct record" do
       bank_account.deposit(500)
       expect(bank_account.transactions[0]).to eq({date: Time.now.strftime("%d/%m/%Y"),
-        credit: 500, 
+        credit: 500,
         debit: 0,
         balance: 500})
     end
@@ -30,6 +30,12 @@ describe BankAccount do
       bank_account.withdraw(1000)
       expect(bank_account.balance).to eq(1000)
     end
+
+    it "adds a record to the transactions array" do
+      bank_account.deposit(1000)
+      expect{bank_account.withdraw(500)}.to change{bank_account.transactions.length}.by(1)
+    end
+
   end
 
 
