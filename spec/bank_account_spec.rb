@@ -6,8 +6,9 @@ describe BankAccount do
   end
 
   describe "#deposit" do
-    it "increase the balance" do
-      expect{bank_account.deposit(500)}.to change{bank_account.balance}.by(500)
+    it "increases the balance" do
+      bank_account.deposit(500)
+      expect(bank_account.balance).to eq(500)
     end
   end
 
