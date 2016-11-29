@@ -4,7 +4,7 @@ An app that allows you to deposit amounts, withdraw amounts, and print a stateme
 
 ## Structure
 
-Since the requirements  are for just one account, it only has one bank account class that can do basic functions.
+The app is separated into two parts: Bank and Account. When bank is created it requires an account. The balance, and methods to modify the balance are stored in the User class. Currently it only works with one account.
 
 ## Setup
 
