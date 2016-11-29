@@ -12,4 +12,13 @@ describe BankAccount do
     end
   end
 
+  describe "#withdraw" do
+    it "decreases the balance" do
+      bank_account.deposit(2000)
+      bank_account.withdraw(1000)
+      expect(bank_account.balance).to eq(1000)
+    end
+  end
+
+
 end
