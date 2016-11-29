@@ -1,20 +1,19 @@
 require 'terminal-table'
 
-class BankAccount
-  attr_reader :balance, :transactions
+class Bank
+  attr_reader :account, :transactions
 
-  def initialize
-    @balance = 0
-    @transactions = []
+  def initialize(account)
+    @account = account
   end
 
   def deposit(amount)
-    @balance += amount
+    @account.add(amount)
     create_record("deposit", amount)
   end
 
   def withdraw(amount)
-    @balance -= amount
+    @account.deduct(amount)
     create_record("withdraw", amount)
   end
 
@@ -29,15 +28,15 @@ class BankAccount
       date: Time.now.strftime("%d/%m/%Y"),
       credit: 0,
       debit: 0,
-      balance: @balance
+      balance: @account.balance
     }
     type == "deposit" ? record[:credit] = amount : record[:debit] = amount
-    @transactions.push(record)
+    @account.add_record(record)
   end
 
   def create_statement
     rows = []
-    @transactions.reverse_each do |record|
+    @account.transactions.reverse_each do |record|
       rows << [record[:date], record[:credit], record[:debit], record[:balance]]
     end
      return Terminal::Table.new :headings => ['Date', 'Credit', 'Debit', 'Balance'], :rows => rows
