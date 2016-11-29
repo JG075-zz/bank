@@ -19,7 +19,7 @@ class BankAccount
 
   def create_record(type, amount)
     record = {
-      date: Time.new,
+      date: Time.now.strftime("%d/%m/%Y"),
       credit: amount,
       debit: 0,
       balance: @balance
